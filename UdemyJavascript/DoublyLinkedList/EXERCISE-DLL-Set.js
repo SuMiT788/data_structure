@@ -124,7 +124,7 @@ class DoublyLinkedList {
 
   /// WRITE SET METHOD HERE ///
   set(index, value) {
-    const temp = get(index);
+    const temp = this.get(index);
     if (temp) {
       temp.value = value;
       return true;
