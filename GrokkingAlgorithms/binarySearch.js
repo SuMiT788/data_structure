@@ -3,7 +3,7 @@ function binarySearch(arr, item) {
   let high = arr.length - 1;
 
   while (low <= high) {
-    const mid = parseInt((high + low) / 2);
+    const mid = Math.floor((high + low) / 2);
     const guess = arr[mid];
     if (guess === item) {
       return mid;
