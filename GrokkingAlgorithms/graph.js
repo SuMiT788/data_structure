@@ -7,25 +7,29 @@ const main = () => {
   graph["alice"] = ["peggy"];
   graph["claire"] = ["thom", "jonny"];
   graph["anuj"] = [];
-  graph["peggy"] = [];
+  graph["peggy"] = ["bob"];
   graph["thom"] = [];
   graph["jonny"] = [];
 
   const searchQueue = new Queue();
   searchQueue.enqueue(graph["you"]);
+  const searched = new Set();
 
-  while (searchQueue) {
+  while (searchQueue.head) {
     searchQueue.print();
     person = searchQueue.dequeue();
 
-    if (personIsSeller(person)) {
-      console.log(`${person} is a seller!`);
-      return true;
-    } else {
-      searchQueue.enqueue(graph[person]);
+    if (!searched.has(person)) {
+      if (personIsSeller(person)) {
+        console.log(`${person} is a seller!`);
+        return person;
+      } else {
+        searchQueue.enqueue(graph[person]);
+        searched.add(person);
+      }
     }
   }
-  return false;
+  return null;
 };
 
 // dummyfunction for test purpose
@@ -33,4 +37,4 @@ function personIsSeller(name) {
   return name === "thom";
 }
 
-main();
+console.log("-> result:", main());
